@@ -4,11 +4,14 @@ ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
 WORKDIR /app
+COPY . /app
 
-COPY requirements.txt ./
 
-RUN apk update \
+RUN addgroup -S app \
+    && adduser -S app -G app\
+    && apk update \
     && apk add --no-cache postgresql-dev gcc python3-dev musl-dev\
-    && pip install --no-cache-dir -r requirements.txt
+    && pip install --no-cache-dir -r requirements.txt \
+    && chown -R app:app /app
 
-copy . /app
+USER app
