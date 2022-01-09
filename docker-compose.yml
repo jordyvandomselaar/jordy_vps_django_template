@@ -6,9 +6,9 @@ services:
     volumes:
       - ./data/db:/var/lib/postgresql/data
     environment:
-      - POSTGRES_USER="${SQL_USER}"
-      - POSTGRES_PASSWORD="${SQL_PASSWORD}"
-      - POSTGRES_DB="${SQL_DATABASE}"
+      - POSTGRES_USER=${SQL_USER}
+      - POSTGRES_PASSWORD=${SQL_PASSWORD}
+      - POSTGRES_DB=${SQL_DATABASE}
     ports:
       - "5432:${SQL_PORT}"
   web:
