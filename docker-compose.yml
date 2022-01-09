@@ -1,0 +1,36 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER="${SQL_USER}"
+      - POSTGRES_PASSWORD="${SQL_PASSWORD}"
+      - POSTGRES_DB="${SQL_DATABASE}"
+    ports:
+      - "5432:${SQL_PORT}"
+  web:
+    build: .
+    command: gunicorn --bind=0.0.0.0:8000 app.wsgi
+    env_file:
+      - .env
+    volumes:
+      - ./static:/app/static
+    expose:
+      - "8000"
+    depends_on:
+      - db
+  webserver:
+    image: nginx:alpine
+    ports:
+      - "81:80"
+      - "444:443"
+    volumes:
+      - ./data/nginx.conf:/etc/nginx/nginx.conf
+      - /usr/local/psa/var/modules/letsencrypt/etc/live/recursing-colden.81-169-175-44.plesk.page:/etc/letsencrypt/live/recursing-colden.81-169-175-44.plesk.page
+      - /usr/local/psa/var/modules/letsencrypt/etc/archive/recursing-colden.81-169-175-44.plesk.page:/etc/letsencrypt/archive/recursing-colden.81-169-175-44.plesk.page
+      - ./static:/app/static
+    depends_on:
+      - web
