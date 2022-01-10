@@ -1,0 +1,4 @@
+.git
+data/db/
+docker-compose.yml
+.idea
