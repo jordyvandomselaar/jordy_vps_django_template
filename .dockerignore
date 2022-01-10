@@ -2,3 +2,4 @@
 data/db/
 docker-compose.yml
 .idea
+.env.example

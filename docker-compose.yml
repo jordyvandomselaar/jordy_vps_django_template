@@ -13,9 +13,9 @@ services:
       - "5432:${SQL_PORT}"
   web:
     build: .
-    command: gunicorn --bind=0.0.0.0:8000 app.wsgi
+    entrypoint: ["./data/web_start.sh"]
     env_file:
-      - .env
+      - ./.env
     volumes:
       - ./static:/app/static
     expose:
