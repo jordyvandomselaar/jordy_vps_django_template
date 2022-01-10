@@ -13,7 +13,7 @@ services:
       - "5432:${SQL_PORT}"
   web:
     build: .
-    entrypoint: ["./data/web_start.sh"]
+    entrypoint: ["sh", "./data/web_start.sh"]
     env_file:
       - ./.env
     volumes:
