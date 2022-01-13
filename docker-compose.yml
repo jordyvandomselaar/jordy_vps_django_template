@@ -31,7 +31,7 @@ services:
       - ./data/nginx.conf:/etc/nginx/nginx.conf
       - /usr/local/psa/var/modules/letsencrypt/etc/live/recursing-colden.81-169-175-44.plesk.page:/etc/letsencrypt/live/recursing-colden.81-169-175-44.plesk.page
       - /usr/local/psa/var/modules/letsencrypt/etc/archive/recursing-colden.81-169-175-44.plesk.page:/etc/letsencrypt/archive/recursing-colden.81-169-175-44.plesk.page
-      - static-data:/app/static
+      - static-data:/static
     depends_on:
       - web
 volumes:
