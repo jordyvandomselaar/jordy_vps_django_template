@@ -4,7 +4,7 @@ services:
   db:
     image: postgres
     volumes:
-      - ./data/db:/var/lib/postgresql/data
+      - db-data:/var/lib/postgresql/data
     environment:
       - POSTGRES_USER=${SQL_USER}
       - POSTGRES_PASSWORD=${SQL_PASSWORD}
@@ -17,7 +17,7 @@ services:
     env_file:
       - ./.env
     volumes:
-      - ./static:/app/static
+      - static-data:/app/static
     expose:
       - "8000"
     depends_on:
@@ -31,6 +31,9 @@ services:
       - ./data/nginx.conf:/etc/nginx/nginx.conf
       - /usr/local/psa/var/modules/letsencrypt/etc/live/recursing-colden.81-169-175-44.plesk.page:/etc/letsencrypt/live/recursing-colden.81-169-175-44.plesk.page
       - /usr/local/psa/var/modules/letsencrypt/etc/archive/recursing-colden.81-169-175-44.plesk.page:/etc/letsencrypt/archive/recursing-colden.81-169-175-44.plesk.page
-      - ./static:/app/static
+      - static-data:/app/static
     depends_on:
       - web
+volumes:
+  static-data:
+  db-data:
