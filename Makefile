@@ -15,7 +15,7 @@ dev-down:
 
 prod-up:
 	@echo "Starting prod containers"
-	docker-compose -f docker-compose.yml -f docker-compose.prod.yml build --build-arg USER_ID=$(shell id -u) --build-arg GROUP_ID=$(shell id -g)
+	docker-compose -f docker-compose.yml -f docker-compose.prod.yml build --build-arg USER_ID=1000 --build-arg GROUP_ID=1000
 	docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d --force-recreate --remove-orphans
 
 prod-down:
