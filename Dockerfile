@@ -6,7 +6,7 @@ ARG GROUP_ID
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
-RUN mkdir /app && mkdir /public
+RUN mkdir /app && mkdir -p /public/static
 WORKDIR /app
 COPY src /app
 
