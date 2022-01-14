@@ -12,5 +12,4 @@ services:
       file: ./docker/web.yml
       service: web
 volumes:
-  static-data:
   db-data:
