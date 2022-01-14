@@ -11,12 +11,6 @@ services:
       service: web
     depends_on:
       - db
-  webserver:
-    extends:
-      file: ./docker/webserver.yml
-      service: webserver
-    depends_on:
-      - web
 volumes:
   static-data:
   db-data:

@@ -1,0 +1,22 @@
+version: "3.9"
+
+services:
+  db:
+    extends:
+      file: ./docker/db.yml
+      service: db
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+  web:
+    extends:
+      file: ./docker/web.yml
+      service: web
+    entrypoint: ["/data/web_start.dev.sh"]
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    volumes:
+      - ./src:/app
+      - ./data/web_start.dev.sh:/data/web_start.dev.sh
+      - ./static:/public/static

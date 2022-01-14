@@ -1,0 +1,34 @@
+version: "3.9"
+
+services:
+  db:
+    extends:
+      file: ./docker/db.yml
+      service: db
+    volumes:
+      - db-data:/var/lib/postgresql/data
+  web:
+    extends:
+      file: ./docker/web.yml
+      service: web
+    entrypoint: ["/data/web_start.prod.sh"]
+    expose:
+      - "8000"
+    depends_on:
+      - db
+    volumes:
+      - static-data:/app/static
+      - ./data/web_start.prod.sh:/data/web_start.prod.sh
+  webserver:
+    extends:
+      file: ./docker/webserver.yml
+      service: webserver
+    volumes:
+      - ./data/nginx.prod.conf:/etc/nginx/nginx.conf
+      - /usr/local/psa/var/modules/letsencrypt/etc/live/recursing-colden.81-169-175-44.plesk.page:/etc/letsencrypt/live/recursing-colden.81-169-175-44.plesk.page
+      - /usr/local/psa/var/modules/letsencrypt/etc/archive/recursing-colden.81-169-175-44.plesk.page:/etc/letsencrypt/archive/recursing-colden.81-169-175-44.plesk.page
+      - ./static:/public/static
+    depends_on:
+      - db
+volumes:
+  db-data:

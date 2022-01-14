@@ -1,5 +1,9 @@
 .git
 data/db/
 docker-compose.yml
+docker-compose.override.yml
+docker-compose.prod.yml
 .idea
 .env.example
+Makefile
+./docker

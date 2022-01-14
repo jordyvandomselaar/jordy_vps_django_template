@@ -3,11 +3,9 @@ version: "3.9"
 services:
   db:
     image: postgres
-    volumes:
-      - db-data:/var/lib/postgresql/data
     environment:
       - POSTGRES_USER=${SQL_USER}
       - POSTGRES_PASSWORD=${SQL_PASSWORD}
       - POSTGRES_DB=${SQL_DATABASE}
     ports:
-      - "5432:${SQL_PORT}"
+      - 5432:${SQL_PORT}
