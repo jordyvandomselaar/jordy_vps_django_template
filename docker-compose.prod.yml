@@ -7,6 +7,8 @@ services:
       service: db
     volumes:
       - db-data:/var/lib/postgresql/data
+    depends_on:
+      - web
   web:
     extends:
       file: ./docker/web.yml
@@ -14,8 +16,6 @@ services:
     entrypoint: ["/data/web_start.prod.sh"]
     expose:
       - "8000"
-    depends_on:
-      - db
     volumes:
       - ./static:/public/static
       - ./data/web_start.prod.sh:/data/web_start.prod.sh
@@ -29,6 +29,6 @@ services:
       - /usr/local/psa/var/modules/letsencrypt/etc/archive/recursing-colden.81-169-175-44.plesk.page:/etc/letsencrypt/archive/recursing-colden.81-169-175-44.plesk.page
       - ./static:/public/static
     depends_on:
-      - db
+      - web
 volumes:
   db-data:
