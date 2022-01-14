@@ -17,7 +17,7 @@ services:
     depends_on:
       - db
     volumes:
-      - static-data:/app/static
+      - ./static:/public/static
       - ./data/web_start.prod.sh:/data/web_start.prod.sh
   webserver:
     extends:
