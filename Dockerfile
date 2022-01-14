@@ -19,4 +19,4 @@ RUN addgroup  --gid $GROUP_ID -S app \
     && chown -R app:app /app \
     && chown -R app:app /public
 
-USER app
+#USER app
